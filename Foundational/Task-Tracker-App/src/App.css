@@ -7,6 +7,5 @@
     radial-gradient(at 0% 21%, hsla(355, 100%, 93%, 1) 0px, transparent 50%),
     radial-gradient(at 100% 91%, hsla(242, 100%, 70%, 1) 0px, transparent 50%);
     display: flex;
-    align-items: center;
     justify-content: center;
 }

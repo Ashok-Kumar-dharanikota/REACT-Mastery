@@ -1,22 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react';
 import style from './Field.module.css';
 import Item from '../Item/Item';
 
-const Field = () => {
+const Field = ({ fieldList }) => {
+    const [itemCount, setItemCount] = useState(0);
+
+    const handleClick = () => {
+        setItemCount(itemCount + 1);
+    };
+
     return (
-        <div style={{display: 'flex', flexDirection: 'column'}}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div className={style.field}>
                 <div className={style.option}>
-                    <p>Field</p>
-                    <span>2</span>
+                    <p>{fieldList.name}</p>
+                    <span>{itemCount}</span>
                 </div>
-                <span>+</span>
+                <span onClick={handleClick}>+</span>
             </div>
 
-            <Item />
+            {Array.from({ length: itemCount }, (_, index) => (
+                <Item key={index} />
+            ))}
         </div>
+    );
+};
 
-    )
-}
-
-export default Field
+export default Field;
