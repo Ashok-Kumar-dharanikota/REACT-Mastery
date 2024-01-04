@@ -20,7 +20,7 @@ const Field = ({ fieldList }) => {
             </div>
 
             {Array.from({ length: itemCount }, (_, index) => (
-                <Item key={index} />
+                <Item key={index} Task={fieldList[index]} />
             ))}
         </div>
     );
