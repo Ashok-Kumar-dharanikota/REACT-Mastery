@@ -8,7 +8,7 @@
     min-height: 100px;
     color: black;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap: 10px;
     overflow: hidden;
 }
@@ -33,4 +33,5 @@
     flex-direction: column;
     gap: 10px;
     cursor: pointer;
+    margin-left: auto;
 }
