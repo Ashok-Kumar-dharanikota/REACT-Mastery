@@ -9,45 +9,47 @@ import notsave from '../../assets/not-save.svg'
 
 const Item = ({ Task }) => {
 
-  const [task, setTask] = useState(true);
+  const [task, saveTask] = useState(true);
   const [open, isOpen] = useState(true);
-  const [savetask, setSaveTask] = useState(true);
-  const [update, setUpdate] = useState(true);
+  const [done, setDone] = useState(false)
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  var tempName;
-  var tempDesc;
 
 
   const handleNameChanges = (e) => {
-    tempName = e.target.value;
+    setName(e.target.value);
   }
 
   const handleDesChange = (e) => {
-    tempDesc = e.target.value;
+     setDescription(e.target.value);
   }
 
   const handleSave = () => {
-    setName(tempName);
-    setDescription(tempDesc);
-    setSaveTask(!savetask);
+    setName(name);
+    setDescription(description);
+    saveTask(!task);
+  }
+
+  const handleDoubleClick = () => {
+    isOpen(!open);
+    saveTask(false);
   }
 
   return (
-    <div onDoubleClick={() => isOpen(!open)} className={style.item}>
+    <div onDoubleClick={handleDoubleClick} className={style.item}>
 
-      <img onClick={() => setTask(!task)} src={task ? uncheck : check} alt="" width={20} height={20} />
+      <img onClick={() => setDone(!done)} src={done ? check : uncheck} alt="" width={20} height={20} />
 
       <div style={{display: 'flex', flexDirection: 'column'}}>
-        {savetask ?
-          <input type="text" placeholder='Task name...' className={style.input} onChange={handleNameChanges} value={tempName} />
+        {task ?
+          <input type="text" placeholder='Task name...' className={style.input} onChange={handleNameChanges} value={name} />
           : <h1>{name}</h1>
         }
 
         {
-          savetask ?
-            <input type="text" placeholder='description' className={style.input} onChange={handleDesChange} value={tempDesc} />
+          task ?
+            <input type="text" placeholder='description' className={style.input} onChange={handleDesChange} value={description} />
             : <p>{description}</p>
         }
       </div>
@@ -55,9 +57,9 @@ const Item = ({ Task }) => {
 
       <div style={{display: open ? 'flex' : 'none'}} className={style.options}>
 
-        <img onClick={handleSave} src={savetask ? save : notsave} alt="" width={20} height={20} />
-        <img onClick={() => setUpdate(!update)} src={edit} alt="" width={20} height={20} />
-        <img src={deleteIcon} alt="" width={20} height={20} />
+        <img onClick={handleSave}  src={task ? save : notsave} alt="" width={20} height={20} />
+        {/* <img  src={edit} alt="" width={20} height={20} /> */}
+        <img  src={deleteIcon} alt="" width={20} height={20} />
 
       </div>
 
