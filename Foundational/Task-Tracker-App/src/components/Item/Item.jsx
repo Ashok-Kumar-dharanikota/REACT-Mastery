@@ -3,7 +3,6 @@ import style from './Item.module.css';
 import check from '../../assets/check.svg'
 import uncheck from '../../assets/uncheck.svg'
 import save from '../../assets/save.svg'
-import edit from '../../assets/edit.png'
 import deleteIcon from '../../assets/delete.svg'
 import notsave from '../../assets/not-save.svg'
 
