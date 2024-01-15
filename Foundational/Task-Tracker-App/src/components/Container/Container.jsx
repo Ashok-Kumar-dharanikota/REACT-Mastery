@@ -26,17 +26,17 @@ const Container = () => {
             <Title />
 
             <div className={style.nav}>
-                <input onChange={handleChange} className={style.inputfield} value={name} type='text' placeholder='Write your task'/>
+                <input onChange={handleChange} className={style.inputfield} value={name} type='text' placeholder='Write your task' />
 
                 <button onClick={handleClick}>add +</button>
             </div>
 
-            <div style={{display: 'flex', gap: 30}}>
-                {fields.map((field) => (
-                    <Field key={field.name} fieldList={field} />
-                ))}
-
+            <div style={{ display: 'flex', gap: 30 }}>
+                <Field name={"Todo's"} />
+                <Field name={"Progress"} />
+                <Field name={"Completed"} />
             </div>
+
         </div>
     )
 }
