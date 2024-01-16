@@ -42,14 +42,14 @@ const Item = ({ Task }) => {
 
       <div style={{display: 'flex', flexDirection: 'column'}}>
         {task ?
-          <input type="text" placeholder='Task name...' className={style.input} onChange={handleNameChanges} value={name} />
-          : <h1>{name}</h1>
+          <input type="text" placeholder='Task name...' className={style.input} onChange={handleNameChanges} value={Task.title} />
+          : <h1>{Task.title}</h1>
         }
 
         {
           task ?
-            <input type="text" placeholder='description' className={style.input} onChange={handleDesChange} value={description} />
-            : <p>{description}</p>
+            <input type="text" placeholder='description' className={style.input} onChange={handleDesChange} value={Task.desc} />
+            : <p>{Task.desc}</p>
         }
       </div>
 

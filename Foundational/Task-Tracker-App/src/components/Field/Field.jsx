@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import style from './Field.module.css';
 import Item from '../Item/Item';
+import { AppContext } from '../../App';
 
-const Field = ({ name }) => {
+const Field = ({ name, Itemlist }) => {
 
-    const [list, setList] = useState([]);
+    const data = useContext(AppContext);
 
     const handleClick = () => {
         const newItem = {
             title: " ",
-            des: ""
+            des: " "
         }
-        setList([...list,newItem]);
+        setList([...Itemlist, newItem]);
 
     };
 
@@ -20,7 +21,7 @@ const Field = ({ name }) => {
             <div className={style.field}>
                 <div className={style.option}>
                     <p>{name}</p>
-                    <span>{list.length}</span>
+                    <span>{Itemlist.length}</span>
                 </div>
                 <span onClick={handleClick}>+</span>
             </div>
@@ -29,8 +30,8 @@ const Field = ({ name }) => {
                 <Item key={index} Task={fieldList[index]} />
             ))} */}
 
-            {list.map((item) => (
-                <Item />
+            {Itemlist.map((item) => (
+                <Item key={item.title} Task={item} />
             ))}
         </div>
     );

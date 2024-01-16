@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import style from './Container.module.css';
 import Title from '../Title/Title';
 import Field from '../Field/Field';
+import { AppContext } from '../../App';
 
 const Container = () => {
+
+    const DataList = useContext(AppContext);
 
     const [fields, setFields] = useState([]);
     const [name, setName] = useState("");
@@ -32,9 +35,12 @@ const Container = () => {
             </div>
 
             <div style={{ display: 'flex', gap: 30 }}>
-                <Field name={"Todo's"} />
+                {/* <Field name={"Todo's"} />
                 <Field name={"Progress"} />
-                <Field name={"Completed"} />
+                <Field name={"Completed"} /> */}
+                {DataList.map((field) => (
+                    <Field key={field.name} name={field.name} Itemlist={field.list}/>
+                ))}
             </div>
 
         </div>
