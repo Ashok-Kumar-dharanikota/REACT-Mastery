@@ -1,34 +1,60 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import check from "./assets/checked.png"
+import uncheck from './assets/unchecked.png';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [list, setList] = useState([]);
+  const [task, setTask] = useState("");
+  const [id, setId] = useState(1);
+
+  const handleChanges = (e) => {
+    setTask(e.target.value);
+  }
+
+  const createTask = () => {
+    const newTask = {
+      id: id,
+      name: task,
+      completed: false,
+    }
+    setList([...list, newTask]);
+    setId(id + 1);
+    setTask('');
+  }
+
+  const deleteTask = (id) => {
+    let filteredTasks = list.filter((item) => item.id !== id);
+    setList(filteredTasks);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <section className='App'>
+
+      <div className='container'>
+        <h1>Todo List</h1>
+
+        <div>
+          <div style={{ display: 'flex', gap: 15 }}>
+            <input className='inputfield' onChange={handleChanges} type="text" id='task-input' value={task} placeholder='Add a task...' />
+            <button className='createBtn' onClick={createTask}>Create</button>
+          </div>
+
+          {list.map((task) => (
+            <div key={task.id} style={{display: 'flex', justifyContent: 'space-between', gap: 20}}>
+              <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                <img src={check} alt="" width={24} height={24} />
+                <p>{task.name}</p>
+              </div>
+              <span onClick={() => deleteTask(task.id)}>x</span>
+            </div>
+
+          ))}
+        </div>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </section>
   )
 }
 
