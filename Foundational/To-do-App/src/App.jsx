@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import './App.css'
-import check from "./assets/checked.png"
-import uncheck from './assets/unchecked.png';
+import Task from './components/Task';
 
 function App() {
 
   const [list, setList] = useState([]);
   const [task, setTask] = useState("");
   const [id, setId] = useState(1);
-  const [done, setDone] = useState(false);
 
   const handleChanges = (e) => {
     setTask(e.target.value);
@@ -25,15 +23,6 @@ function App() {
     setTask('');
   }
 
-  const deleteTask = (id) => {
-    let filteredTasks = list.filter((item) => item.id !== id);
-    setList(filteredTasks);
-  }
-
-  const handleCheck = () => {
-    setDone(!done);
-  }
-
   return (
     <section className='App'>
 
@@ -47,14 +36,7 @@ function App() {
           </div>
 
           {list.map((task) => (
-            <div key={task.id} style={{display: 'flex', justifyContent: 'space-between', gap: 20}}>
-              <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                <img src={done ? check : uncheck} onClick={handleCheck} alt="" width={24} height={24} />
-                <p style={{textDecoration: done ? "line-through" : "none"}}>{task.name}</p>
-              </div>
-              <span onClick={() => deleteTask(task.id)}>x</span>
-            </div>
-
+              <Task key={task.id} task={task}/>
           ))}
         </div>
 
