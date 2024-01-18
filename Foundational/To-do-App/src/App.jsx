@@ -8,6 +8,7 @@ function App() {
   const [list, setList] = useState([]);
   const [task, setTask] = useState("");
   const [id, setId] = useState(1);
+  const [done, setDone] = useState(false);
 
   const handleChanges = (e) => {
     setTask(e.target.value);
@@ -29,13 +30,17 @@ function App() {
     setList(filteredTasks);
   }
 
+  const handleCheck = () => {
+    setDone(!done);
+  }
+
   return (
     <section className='App'>
 
       <div className='container'>
         <h1>Todo List</h1>
 
-        <div>
+        <div style={{display: 'flex', flexDirection: 'column', gap: 30}}>
           <div style={{ display: 'flex', gap: 15 }}>
             <input className='inputfield' onChange={handleChanges} type="text" id='task-input' value={task} placeholder='Add a task...' />
             <button className='createBtn' onClick={createTask}>Create</button>
@@ -44,8 +49,8 @@ function App() {
           {list.map((task) => (
             <div key={task.id} style={{display: 'flex', justifyContent: 'space-between', gap: 20}}>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                <img src={check} alt="" width={24} height={24} />
-                <p>{task.name}</p>
+                <img src={done ? check : uncheck} onClick={handleCheck} alt="" width={24} height={24} />
+                <p style={{textDecoration: done ? "line-through" : "none"}}>{task.name}</p>
               </div>
               <span onClick={() => deleteTask(task.id)}>x</span>
             </div>
