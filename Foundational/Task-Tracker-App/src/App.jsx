@@ -1,42 +1,60 @@
 import { createContext, useState } from 'react'
 import './App.css'
-import Container from './components/Container/Container'
-import { name } from 'ejs'
-
-
-const AppData = [
-  {
-    name: "todo",
-    list: [
-      { id: 1, title: "one", desc: "lerem" }
-    ]
-  },
-  {
-    name: "progress",
-    list: [
-      { id: 2, title: "two", desc: "lerem" }
-    ]
-  },
-  {
-    name: "completed",
-    list: [
-      { id: 3, title: "three", desc: "lerem" }
-    ]
-  }
-]
-
-export const AppContext = createContext(AppData);
+import TestComponent from './components/TestComponent';
+import Container from './components/Container/Container';
+export const context = createContext();
 
 
 function App() {
 
+  const data = [
+    {
+      fieldName: "Todo",
+      list: [
+        {
+          id: Math.random().toString(),
+          title: "Ashok",
+          desc: "",
+          status: "NS"
+        }
+      ]
+    },
+    {
+      fieldName: "Progress",
+      list: [
+        {
+          id: Math.random().toString(),
+          title: "",
+          desc: "",
+          status: "OP"
+        }
+      ]
+    },
+    {
+      fieldName: "Completed",
+      list: [
+        {
+          id: Math.random().toString(),
+          title: "",
+          desc: "",
+          status: "CD"
+        }
+      ]
+    }
+
+  ]
+
+  const [store, setStore] = useState(data)
+
   return (
-    <AppContext.Provider value={AppData}>
-      <section className='App'>
+    <section className='App'>
+
+      <context.Provider value={[store, setStore]}>
         <Container />
-      </section>
-    </AppContext.Provider>
+      </context.Provider>
+
+    </section>
   )
 }
 
-export default App
+export default App;

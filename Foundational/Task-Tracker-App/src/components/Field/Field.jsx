@@ -1,37 +1,38 @@
 import React, { useContext, useState } from 'react';
 import style from './Field.module.css';
+import { context } from '../../App';
 import Item from '../Item/Item';
-import { AppContext } from '../../App';
 
-const Field = ({ name, Itemlist }) => {
+const Field = ({ field }) => {
 
-    const data = useContext(AppContext);
+    const [store, setStore] = useContext(context);
+    const [ItemList, setItemList] = useState(field.list);
+
 
     const handleClick = () => {
         const newItem = {
-            title: " ",
-            des: " "
+            id: Math.random().toString(),
+            title: "",
+            desc: "",
+            status: "NS"
         }
-        setList([...Itemlist, newItem]);
 
-    };
+        
+
+    }
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div className={style.field}>
                 <div className={style.option}>
-                    <p>{name}</p>
-                    <span>{Itemlist.length}</span>
+                    <p>{field.fieldName}</p>
+                    <span>{0}</span>
                 </div>
-                <span onClick={handleClick}>+</span>
+                <span>+</span>
             </div>
 
-            {/* {Array.from({ length: itemCount }, (_, index) => (
-                <Item key={index} Task={fieldList[index]} />
-            ))} */}
-
-            {Itemlist.map((item) => (
-                <Item key={item.title} Task={item} />
+            {ItemList.map((item) => (
+                <Item key={item.id} Task={item} />
             ))}
         </div>
     );
