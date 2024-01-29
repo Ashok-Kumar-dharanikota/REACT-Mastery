@@ -1,11 +1,8 @@
-import { DndProvider } from "react-dnd";
-import Card from "./components/Card";
 import FieldComponent from "./components/FieldComponent";
 import ItemCard from "./components/ItemCard";
-import { HTML5Backend } from 'react-dnd-html5-backend'
 import { createContext } from "react";
-
-export const AppContext = createContext();
+import Container from "./components/Container"
+export const context = createContext();
 
 export default function App() {
 
@@ -64,7 +61,7 @@ export default function App() {
   return (
     <section className="text-3xl font-bold bg-gradient-to-r from-blue-300 to-blue-600 w-full h-screen flex gap-2">
 
-      <AppContext.Provider>
+      <context.Provider value={"Ashok"}>
 
 
         {/* {styles.map((item) => (
@@ -81,11 +78,13 @@ export default function App() {
       ))}
  */}
 
-        <DndProvider backend={HTML5Backend}>
+        {/* <DndProvider backend={HTML5Backend}>
           <Card text={"HELLO"} />
-        </DndProvider>
+        </DndProvider> */}
 
-      </AppContext.Provider>
+        <Container />
+
+      </context.Provider>
 
     </section>
   )
